@@ -1,8 +1,8 @@
 # The World in One Day — Friday 20 November 2026
 
-[![make.fun bounty](https://img.shields.io/badge/make.fun-bounty%20news--image--20261120-red)](https://make.fun/bounty/news-image-20261120)
-[![entry](https://img.shields.io/badge/entry-The%20World%20in%20One%20Day-blue)](https://make.fun/bounty/news-image-20261120)
-[![date](https://img.shields.io/badge/date-Friday%2020%20November%202026-green)](https://make.fun/bounty/news-image-20261120)
+[![make.fun · news-image-20261120](https://make.fun/badge/news-image-20261120.svg)](https://make.fun/bounty/news-image-20261120?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
+[![rank](https://make.fun/badge/news-image-20261120/ixciamakima/news-image-20261120/rank.svg)](https://make.fun/bounty/news-image-20261120/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
+[![reward](https://make.fun/badge/news-image-20261120/ixciamakima/news-image-20261120/reward.svg)](https://make.fun/bounty/news-image-20261120?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
 
 One image that sums up a whole day of world news: a 1024 x 1024
 front page for **Friday 20 November 2026**, drawn programmatically
