@@ -3,7 +3,7 @@
 
 Draws a single-page broadsheet summing up Friday 20 November 2026:
 a markets-rout lead with a vector chart, a numbered world map, a
-30-story pictogram grid, a closing-figures strip and a sources line.
+27-story pictogram grid, a closing-figures strip and a sources line.
 
 Deterministic: no randomness, no timestamps; two runs of this file
 produce a byte-identical entry.png. In-session only (uses Pillow);
@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "entry.png")
 
-W, H = 1024, 1192
+W, H = 1024, 1024
 MARGIN = 20
 CW = W - 2 * MARGIN  # content width = 984
 
@@ -137,20 +137,14 @@ STORIES = [
      "Estimate: 24.6m copies, $2.36bn"),
     (23, "checkered", "Norris on pole in Las Vegas",
      "1:47.934 wet lap; Hamilton 20th"),
-    (24, "dollar", "Dollar tops April 2025 level",
-     "Index 103.86 amid market rout"),
-    (25, "chat", "Chen, Min Zin raised by US",
-     "Aide raises detained Americans"),
-    (26, "shieldx", "Russia: no guarantee plan",
+    (24, "shieldx", "Russia: no guarantee plan",
      "Ryabkov rebuffs Ukraine pledges"),
-    (27, "flagpole", "Israel completes Gaza op",
+    (25, "flagpole", "Israel completes Gaza op",
      "Beyond the Yellow Line (BBC)"),
-    (28, "doc", "Venezuela signs US deal",
+    (26, "doc", "Venezuela signs US deal",
      "Army pact follows Maduro removal"),
-    (29, "ballot", "Bukele seeks third term",
+    (27, "ballot", "Bukele seeks third term",
      "Launches third-term bid (AP)"),
-    (30, "snowflake", "UK's coldest autumn night",
-     "Forecast lows down to \u221210C (BBC)"),
 ]
 
 # ----------------------------------------------------------------- map
@@ -192,7 +186,7 @@ MAP_SPANS = [
     [(27, 28)],
 ]
 
-MAP_X, MAP_Y, MAP_W, MAP_H = MARGIN, 480, CW, 144
+MAP_X, MAP_Y, MAP_W, MAP_H = MARGIN, 430, CW, 112
 LON0, LON1 = -170.0, 190.0
 LAT0, LAT1 = 82.0, -58.0
 
@@ -202,8 +196,8 @@ MARKERS = [
     (4, 84.9, 19.3), (5, 95.9, 21.9), (7, 51.5, 27.0),
     (8, 46.7, 24.6), (9, -77.0, 38.9), (10, 121.0, 23.7),
     (13, 21.8, 50.4), (16, -17.2, 14.7), (19, 37.9, -1.3),
-    (20, 151.2, -33.9), (23, -115.1, 36.2), (27, 34.3, 31.4),
-    (28, -66.9, 10.5), (29, -89.2, 13.8), (30, -1.5, 52.5),
+    (20, 151.2, -33.9), (23, -115.1, 36.2), (25, 34.3, 31.4),
+    (26, -66.9, 10.5), (27, -89.2, 13.8),
 ]
 MARKER_R = 12
 MARKER_MIN_DIST = 25.0
@@ -531,36 +525,36 @@ FIT = []  # (label, measured_width, max_width)
 def draw_masthead(d):
     t = "THE WORLD IN ONE DAY"
     FIT.append(("title", d.textlength(t, font=F_TITLE), CW))
-    d.text((W / 2, 14), t, font=F_TITLE, fill=INK, anchor="ma")
+    d.text((W / 2, 10), t, font=F_TITLE, fill=INK, anchor="ma")
     t = "FRIDAY 20 NOVEMBER 2026"
     FIT.append(("date", d.textlength(t, font=F_DATE), CW))
-    d.text((W / 2, 74), t, font=F_DATE, fill=RED, anchor="ma")
-    t = "31 STORIES \u00b7 ONE PAGE \u00b7 EVERY FIGURE AS REPORTED ON THE DAY"
+    d.text((W / 2, 68), t, font=F_DATE, fill=RED, anchor="ma")
+    t = "28 STORIES \u00b7 ONE PAGE \u00b7 EVERY FIGURE AS REPORTED ON THE DAY"
     FIT.append(("kicker", d.textlength(t, font=F_KICKER), CW))
-    d.text((W / 2, 130), t, font=F_KICKER, fill=DARKGREY, anchor="ma")
-    d.rectangle([MARGIN, 156, W - MARGIN, 159], fill=INK)
-    d.rectangle([MARGIN, 162, W - MARGIN, 163], fill=INK)
+    d.text((W / 2, 124), t, font=F_KICKER, fill=DARKGREY, anchor="ma")
+    d.rectangle([MARGIN, 148, W - MARGIN, 151], fill=INK)
+    d.rectangle([MARGIN, 154, W - MARGIN, 155], fill=INK)
 
 
 def draw_lead(d):
-    d.rectangle([MARGIN, 172, W - MARGIN, 444], fill=DARK)
+    d.rectangle([MARGIN, 164, W - MARGIN, 398], fill=DARK)
     tag = "LEAD"
     tw = d.textlength(tag, font=F_BODY_B)
-    d.rectangle([36, 186, 36 + tw + 16, 212], fill=RED)
-    d.text((36 + 8, 190), tag, font=F_BODY_B, fill=(255, 255, 255))
+    d.rectangle([36, 178, 36 + tw + 16, 204], fill=RED)
+    d.text((36 + 8, 182), tag, font=F_BODY_B, fill=(255, 255, 255))
     hx = 36 + tw + 16 + 12
     FIT.append(("lead headline",
                 (hx - MARGIN) + d.textlength(LEAD_HEADLINE,
                                              font=F_LEAD_H), CW))
-    d.text((hx, 184), LEAD_HEADLINE, font=F_LEAD_H, fill=PAPER_TXT)
+    d.text((hx, 176), LEAD_HEADLINE, font=F_LEAD_H, fill=PAPER_TXT)
     FIT.append(("lead sub", d.textlength(LEAD_SUB, font=F_BODY),
                 CW - 32))
-    d.text((36, 222), LEAD_SUB, font=F_BODY, fill=MUTED_DARK)
+    d.text((36, 210), LEAD_SUB, font=F_BODY, fill=MUTED_DARK)
     # chart
     FIT.append(("chart title", d.textlength(CHART_TITLE,
                                             font=F_BODY_B), 520))
-    d.text((36, 252), CHART_TITLE, font=F_BODY_B, fill=PAPER_TXT)
-    gx0, gx1, gy0, gy1 = 40, 552, 286, 388
+    d.text((36, 236), CHART_TITLE, font=F_BODY_B, fill=PAPER_TXT)
+    gx0, gx1, gy0, gy1 = 40, 552, 264, 348
     for fr in (0.25, 0.5, 0.75):
         gy = gy0 + fr * (gy1 - gy0)
         d.line([(gx0, gy), (gx1, gy)], fill=DARK_LINE, width=1)
@@ -571,21 +565,21 @@ def draw_lead(d):
     for (px, py) in pts:
         d.ellipse([px - 4, py - 4, px + 4, py + 4], fill=CHART)
     for x, lab in zip(xs, ["MON", "TUE", "WED", "THU", "FRI"]):
-        d.text((x, 394), lab, font=F_BODY, fill=MUTED_DARK,
+        d.text((x, 354), lab, font=F_BODY, fill=MUTED_DARK,
                anchor="ma")
-    d.text((548, 292), CHART_END, font=F_CHART_BIG, fill=CHART,
+    d.text((548, 270), CHART_END, font=F_CHART_BIG, fill=CHART,
            anchor="ra")
-    d.text((548, 320), CHART_END_SUB, font=F_BODY_B, fill=CHART,
+    d.text((548, 296), CHART_END_SUB, font=F_BODY_B, fill=CHART,
            anchor="ra")
     FIT.append(("chart caption",
                 d.textlength(CHART_CAPTION, font=F_BODY), 500))
-    d.text((36, 418), CHART_CAPTION, font=F_BODY, fill=MUTED_DARK)
+    d.text((36, 376), CHART_CAPTION, font=F_BODY, fill=MUTED_DARK)
     # figures column
-    d.line([(568, 252), (568, 426)], fill=DARK_LINE, width=1)
+    d.line([(568, 236), (568, 392)], fill=DARK_LINE, width=1)
     for i, line in enumerate(LEAD_FIGS):
         FIT.append((f"lead fig {i + 1}",
                     d.textlength(line, font=F_FIG), 404))
-        d.text((584, 252 + i * 22), line, font=F_FIG, fill=PAPER_TXT)
+        d.text((584, 236 + i * 20), line, font=F_FIG, fill=PAPER_TXT)
 
 
 def project(lon, lat):
@@ -625,10 +619,10 @@ def relax_markers(pts):
 def draw_map(d):
     t = "WHERE IT HAPPENED \u2014 FRIDAY'S STORIES ON THE MAP"
     FIT.append(("map title", d.textlength(t, font=F_MAP_T), 700))
-    d.text((MARGIN, 458), t, font=F_MAP_T, fill=INK)
+    d.text((MARGIN, 410), t, font=F_MAP_T, fill=INK)
     t2 = "marker numbers match the grid below"
     FIT.append(("map note", d.textlength(t2, font=F_BODY), 400))
-    d.text((W - MARGIN, 458), t2, font=F_BODY, fill=GREY, anchor="ra")
+    d.text((W - MARGIN, 410), t2, font=F_BODY, fill=GREY, anchor="ra")
     d.rectangle([MAP_X, MAP_Y, MAP_X + MAP_W, MAP_Y + MAP_H],
                 fill=OCEAN)
     cw = MAP_W / MAP_COLS
@@ -655,7 +649,7 @@ def draw_map(d):
 
 def draw_grid(d):
     gx = [MARGIN, MARGIN + 331, MARGIN + 662]
-    gy0, rh, cell_h, cell_w = 638, 46, 40, 321
+    gy0, rh, cell_h, cell_w = 554, 44, 40, 321
     for idx, (num, icon, head, det) in enumerate(STORIES):
         cx = gx[idx % 3]
         cy = gy0 + (idx // 3) * rh
@@ -675,13 +669,13 @@ def draw_grid(d):
 
 
 def draw_strip_footer(d):
-    d.rectangle([MARGIN, 1106, W - MARGIN, 1154], fill=INK)
-    for t, fnt, y in ((STRIP_1, F_STRIP_B, 1113),
-                      (STRIP_2, F_STRIP, 1135)):
+    d.rectangle([MARGIN, 954, W - MARGIN, 998], fill=INK)
+    for t, fnt, y in ((STRIP_1, F_STRIP_B, 960),
+                      (STRIP_2, F_STRIP, 979)):
         FIT.append((f"strip y{y}", d.textlength(t, font=fnt), CW - 16))
         d.text((W / 2, y), t, font=fnt, fill=PAPER_TXT, anchor="ma")
     FIT.append(("footer", d.textlength(FOOTER, font=F_FOOT), CW))
-    d.text((W / 2, 1166), FOOTER, font=F_FOOT, fill=GREY, anchor="ma")
+    d.text((W / 2, 1004), FOOTER, font=F_FOOT, fill=GREY, anchor="ma")
 
 
 def main():

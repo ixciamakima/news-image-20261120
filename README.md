@@ -5,11 +5,12 @@
 [![reward](https://make.fun/badge/news-image-20261120/ixciamakima/news-image-20261120/reward.svg)](https://make.fun/bounty/news-image-20261120?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261120)
 
 One page that sums up a single day of world news: Friday 20 November
-2026. Thirty-one stories — a markets-rout lead with a vector chart of
-the Nasdaq's week, a numbered world map, thirty grid stories each
+2026. Twenty-eight stories — a markets-rout lead with a vector chart of
+the Nasdaq's week, a numbered world map, twenty-seven grid stories each
 told with its own drawn pictogram, a closing-figures strip and a
 sources line. Every figure is as reported on the day; the one
 estimate on the page (GTA VI launch day) is flagged as an estimate.
+The page is exactly 1024×1024 px, inside the competition's size gate.
 
 ## How it works
 
@@ -21,7 +22,7 @@ estimate on the page (GTA VI launch day) is flagged as an estimate.
 - `render.py` is the in-session renderer (Pillow) that drew the
   page. It is deterministic — two runs produce a byte-identical
   `entry.png` — and it self-checks before saving: every text string
-  is measured against its box (no truncation), the 18 map markers
+  is measured against its box (no truncation), the 17 map markers
   are verified non-overlapping, and no text is smaller than 15 px.
 
 ## The stories, with sources
@@ -83,20 +84,14 @@ to $88.91 after a $97.17 debut close; gold $3,517.24 −3.02%; VIX 40,
     copies and $2.36bn on launch day (BBC, Reuters).
 23. Norris on pole in Las Vegas — 1:47.934 in the wet;
     Verstappen second, Hamilton 20th (Reuters, AP).
-24. Dollar tops April 2025 level — dollar index 103.86, its
-    strongest since April 2025 (Reuters).
-25. Chen, Min Zin raised by US — a Trump aide raised the detained
-    Americans Youlin Chen and Min Zin with China (Reuters).
-26. Russia: no guarantee plan — Ryabkov rejects NATO-style
+24. Russia: no guarantee plan — Ryabkov rejects NATO-style
     security guarantees for Ukraine (Reuters).
-27. Israel completes Gaza op — ground operation beyond the
+25. Israel completes Gaza op — ground operation beyond the
     Yellow Line completed (BBC).
-28. Venezuela signs US deal — military pact after Maduro's
+26. Venezuela signs US deal — military pact after Maduro's
     removal (BBC).
-29. Bukele seeks third term — launches his third-term candidacy
+27. Bukele seeks third term — launches his third-term candidacy
     in El Salvador (AP).
-30. UK's coldest autumn night — forecast lows down to −10C
-    (BBC).
 
 ## Round 3 — what improved over Round 2
 
@@ -106,24 +101,24 @@ cut density to 25 stories while the rank-1 entry carries 35 and
 the cutoff entry 36 — breadth is a scored criterion, and Round 2
 under-served it. Round 3 keeps every Round 2 win and fixes that:
 
-- **Density restored without dropping the floor:** 31 stories
-  (1 lead + 30 grid) against Round 2's 25, with body text still
+- **Density restored without dropping the floor:** 28 stories
+  (1 lead + 27 grid) against Round 2's 25, with body text still
   never below 15 px, headlines bold, and every headline and detail
-  on exactly one line. A programmatic fit check measures all 80
+  on exactly one line. A programmatic fit check measures all 74
   text strings on the page against their boxes — zero overflows.
-- **Every grid story is pictured:** each of the 30 stories now
+- **Every grid story is pictured:** each of the 27 stories now
   carries its own drawn vector pictogram (a bridge for Kyiv, scales
   for the ICJ, a spiral for Cyclone Akvan, a derrick for Brent, a
-  ballot box for Bukele, a snowflake for the UK cold night), so a
-  story reads from its picture before its words.
+  ballot box for Bukele), so a story reads from its picture before
+  its words.
 - **Breadth repaired:** a South America story (Bukele, El
   Salvador) returns after Round 2 had none; the map gains an
   accurate Horn of Africa, Central America and Brazil outline, and
-  its 18 numbered markers are placed by a deterministic
+  its 17 numbered markers are placed by a deterministic
   de-overlap pass (minimum pairwise distance 25 px, verified).
 - **The winning lead stays:** the markets rout still leads, with
   the plunging Nasdaq vector chart and the full closing figures,
   now joined by the Nvidia collapse and Anthropic's second-day
   slide as figure lines.
-- **Smaller file:** 219,277 bytes against Round 2's 362,178 —
-  better on the size tie-break while carrying six more stories.
+- **Smaller file:** 205,405 bytes against Round 2's 362,178 —
+  better on the size tie-break while carrying three more stories.
